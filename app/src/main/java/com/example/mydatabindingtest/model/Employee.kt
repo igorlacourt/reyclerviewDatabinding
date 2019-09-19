@@ -21,15 +21,26 @@ data class Employee(
     @SerializedName("last_name")
     val last_name: String
 ) {
-    // important code for loading image here
-    @BindingAdapter("avatar")
-    fun loadImage(imageView: ImageView, imageURL: String) {
-        Glide.with(imageView.getContext())
-            .setDefaultRequestOptions(
-                RequestOptions()
-                    .circleCrop()
-            )
-            .load(imageURL)
-            .into(imageView)
+
+    companion object{
+        @BindingAdapter("avatar")
+        @JvmStatic
+        fun loadImage(view: ImageView, imageUrl: String) {
+            Glide.with(view.context)
+                .load(imageUrl).apply(RequestOptions().circleCrop())
+                .into(view)
+        }
     }
+
+//    // important code for loading image here
+//    @BindingAdapter("avatar")
+//    fun loadImage(imageView: ImageView, imageURL: String) {
+//        Glide.with(imageView.getContext())
+//            .setDefaultRequestOptions(
+//                RequestOptions()
+//                    .circleCrop()
+//            )
+//            .load(imageURL)
+//            .into(imageView)
+//    }
 }
